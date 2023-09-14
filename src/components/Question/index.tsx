@@ -17,8 +17,9 @@ type QuestionProps = {
   };
 
  // { question }: QuestionProps
-const QuestionItem = () => { 
-  const question = {"type":"mcq","id":3794,"playlist":"Period 6: 1865-1898","description":"5.5 Sectional Conflict: Regional Differences #apush","image":"https://cross-platform-rwa.rp.devfactory.com/images/3794%20-%20industrial%20vs%20agricultural%20economy.png","question":"Aside from slavery, what was the most significant difference betweent the North and South during the mid-1800s?","options":[{"id":"A","answer":"An industrial vs. agricultural economy"},{"id":"B","answer":"Income inequality"},{"id":"C","answer":"Dependence on imports"}],"user":{"name":"AP US History","avatar":"https://cross-platform-rwa.rp.devfactory.com/avatars/apush.png"}}
+const QuestionItem = ({question}: QuestionProps)  => { 
+console.log(question)
+  // const question = {"type":"mcq","id":3794,"playlist":"Period 6: 1865-1898","description":"5.5 Sectional Conflict: Regional Differences #apush","image":"https://cross-platform-rwa.rp.devfactory.com/images/3794%20-%20industrial%20vs%20agricultural%20economy.png","question":"Aside from slavery, what was the most significant difference betweent the North and South during the mid-1800s?","options":[{"id":"A","answer":"An industrial vs. agricultural economy"},{"id":"B","answer":"Income inequality"},{"id":"C","answer":"Dependence on imports"}],"user":{"name":"AP US History","avatar":"https://cross-platform-rwa.rp.devfactory.com/avatars/apush.png"}}
   const [isLiked, setIsLiked] = useState(false);
   // const [question, setQuestion] = useState()
   const [minutes, setMinutes] = useState<number>(0);
@@ -75,7 +76,13 @@ const QuestionItem = () => {
         setSelectedOption(option)
     }
   };
-
+  if (question === undefined || question === null || question.question === undefined || question.question === null || question.question === "" || question.options === undefined || question.options === null || question.options.length === 0 || question.options[0].answer === undefined || question.options[0].answer === null || question.options[0].answer === "" || question.user === undefined || question.user === null || question.user.name === undefined || question.user.name === null || question.user.name === "" || question.user.avatar === undefined || question.user.avatar === null || question.user.avatar === "") {
+    return (
+      <View style={styles.container}>
+        <Text>Loading..</Text>
+      </View>
+    );
+  } null
   return (
     <View style={styles.container}>
       <ImageBackground
