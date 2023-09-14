@@ -1,16 +1,18 @@
 import {StyleSheet, Dimensions} from 'react-native';
 const screenWidth = Dimensions.get('window').width;
+const height = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // height: Dimensions.get('window').height - 130,
+    height: Dimensions.get('window').height,
     backgroundColor: '#000',
   },
   uiContainer: {
     height: '100%',
-    justifyContent: 'flex-end',
-    padding: 0
+    justifyContent: 'space-around',
+    padding: 20,
+    position: "relative"
   },
   leftContainer: {
     backgroundColor: "#353935",
@@ -62,7 +64,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'flex-end',
+    alignItems: 'flex-start',
+    marginBottom: "10%"
   },
   handle: {
     color: '#fff',
@@ -97,11 +100,11 @@ const styles = StyleSheet.create({
     borderWidth: 5,
     borderColor: '#4c4c4c',
   },
-
-  //  right container
   rightContainer: {
     alignSelf: 'flex-end',
+    position: 'absolute',
     height: 300,
+    marginTop: height*0.3,
     justifyContent: 'space-between',
     marginRight: 0,
   },

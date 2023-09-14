@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, FlatList, Dimensions, ScrollView } from 'react-native';
+import { StyleSheet, FlatList, Dimensions } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
 import Question from '../../components/Question';
@@ -12,7 +12,8 @@ type QuestionProps = {
 
 export default function TabOneScreen() {
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
-  const numberOfRequests = 10; // Number of times you want to call the API same as number of questions needed
+  const height = Dimensions.get('window').height;
+  const numberOfRequests = 10; 
 
   async function makeMultipleRequests() {
     for (let i = 0; i < numberOfRequests; i++) {
@@ -36,7 +37,7 @@ export default function TabOneScreen() {
     makeMultipleRequests();;
   }, []);
 
-  if (!questions.length < 10) {
+  if (questions.length < 10) {
     <Text>Loading..</Text>
   }
   console.log(questions);
@@ -45,9 +46,9 @@ export default function TabOneScreen() {
       <FlatList
         data={questions}
         renderItem={({item, index}) => <Question question={item} key={index} />}
-        showsVerticalScrollIndicator={false}
+        snapToInterval={height}
         // snapToInterval={Dimensions.get('window').height}
-        // snapToInterval={Dimensions.get('window').height - 130}
+        showsVerticalScrollIndicator={false}
         snapToAlignment={'start'}
         decelerationRate={'fast'}
       /> 
