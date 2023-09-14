@@ -3,18 +3,28 @@ import { StyleSheet, FlatList, Dimensions } from 'react-native';
 
 import { Text, View } from '../../components/Themed';
 import Question from '../../components/Question';
-import { Question as QuestionType  } from '../../components/types';
+import { Question as QuestionType } from '../../components/types';
 
+/**
+ * Props for the Question component.
+ */
 type QuestionProps = {
   question: QuestionType;
 };
 
-
-export default function TabOneScreen() {
+/**
+ * TabOneScreen component renders a list of questions fetched from an API.
+ *
+ * @returns {JSX.Element} The rendered JSX element.
+ */
+export default function HomeScreen() {
   const [questions, setQuestions] = useState<QuestionProps[]>([]);
   const height = Dimensions.get('window').height;
-  const numberOfRequests = 10; 
+  const numberOfRequests = 10;
 
+  /**
+   * Makes multiple API requests to fetch questions and updates the state.
+   */
   async function makeMultipleRequests() {
     for (let i = 0; i < numberOfRequests; i++) {
       if (questions.length === numberOfRequests) {
@@ -25,7 +35,7 @@ export default function TabOneScreen() {
           'https://cross-platform.rp.devfactory.com/for_you'
         );
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setQuestions((prev) => [...prev, data]);
       } catch (error) {
         console.error(`Error in API Request ${i + 1}:`, error);
@@ -34,24 +44,24 @@ export default function TabOneScreen() {
   }
 
   useEffect(() => {
-    makeMultipleRequests();;
+    makeMultipleRequests();
   }, []);
 
   if (questions.length < 10) {
-    <Text>Loading..</Text>
+    return <Text>Loading..</Text>;
   }
   console.log(questions);
+
   return (
     <View style={styles.container}>
       <FlatList
         data={questions}
-        renderItem={({item, index}) => <Question question={item} key={index} />}
+        renderItem={({ item, index }) => <Question question={item} key={index} />}
         snapToInterval={height}
-        // snapToInterval={Dimensions.get('window').height}
         showsVerticalScrollIndicator={false}
         snapToAlignment={'start'}
         decelerationRate={'fast'}
-      /> 
+      />
     </View>
   );
 }
