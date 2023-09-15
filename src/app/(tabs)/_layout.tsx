@@ -32,8 +32,8 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'For You',
+          headerTitleAlign: "center",
           tabBarIcon: ({ color }) => <TabBarIcon name="home" color={color} />,
-          tabBarLabelPosition: "below-icon",
           headerRight: () => (
             <Link href="/modal" asChild>
               <Pressable>

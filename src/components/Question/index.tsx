@@ -22,9 +22,8 @@ type QuestionProps = {
  * @param {QuestionProps} props - The component props.
  * @returns {JSX.Element} The rendered JSX element.
  */
-const QuestionItem = ({ question }: QuestionProps) => {
-  console.log(question);
 
+const QuestionItem = ({ question }: QuestionProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [minutes, setMinutes] = useState<number>(0);
   const [answerStatus, setAnswerStatus] = useState<number>(0);
@@ -61,7 +60,7 @@ const QuestionItem = ({ question }: QuestionProps) => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
-        <View style={{ alignItems: 'center', flexDirection: 'row', marginRight: 100 }}>
+        <View style={{ alignItems: 'center', flexDirection: 'row',}}>
           <FontAwesome
             name="clock-o"
             size={25}

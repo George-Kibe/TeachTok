@@ -27,9 +27,9 @@ export default function HomeScreen() {
    */
   async function makeMultipleRequests() {
     for (let i = 0; i < numberOfRequests; i++) {
-      if (questions.length === numberOfRequests) {
-        break;
-      }
+      // if (questions.length === numberOfRequests) {
+      //   break;
+      // }
       try {
         const response = await fetch(
           'https://cross-platform.rp.devfactory.com/for_you'
@@ -50,13 +50,22 @@ export default function HomeScreen() {
   if (questions.length < 10) {
     return <Text>Loading..</Text>;
   }
-  console.log(questions);
+  // Function to generate random number in case  question is fetched twice
+  function getRandomNumber(min:number, max:number) {
+    // Use Math.random() to generate a random decimal between 0 (inclusive) and 1 (exclusive)
+    const randomDecimal = Math.random();
+  
+    // Scale the random decimal to the desired range and round it to an integer
+    const randomInteger = Math.floor(randomDecimal * (max - min + 1)) + min;
+  
+    return randomInteger;
+  }
 
   return (
     <View style={styles.container}>
       <FlatList
         data={questions}
-        renderItem={({ item, index }) => <Question question={item} key={index} />}
+        renderItem={({ item, index }) => <Question question={item} />}
         snapToInterval={height}
         showsVerticalScrollIndicator={false}
         snapToAlignment={'start'}
@@ -69,5 +78,6 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    maxWidth: 500,
   },
 });
